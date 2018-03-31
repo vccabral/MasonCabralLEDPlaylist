@@ -118,7 +118,9 @@ void loop() {
 
   uint8_t ratio = beatsin8(2);                                // Alternate between 0 and 255 every minute
   for (int i = 0; i < NUM_LEDS; i++) {                        // mix the 2 arrays together
-    leds[i] = blend( ledsA[i], ledsB[i], ratio );
+      if(master_play_list[master_play_list_index]==0){
+        leds[i] = blend( ledsA[i], ledsB[i], ratio );
+      }
   }
   FastLED.show();
 }
