@@ -13,8 +13,8 @@ uint8_t max_bright = 128;                                     // Overall brightn
 //new stuff
 int _sample_size = 0; 
 bool auto_find_frequency_band = true;
-byte CHANGE_FREQUENCY_EVAL_CYCLES = 100;
-float STANDARD_DEV_WIDTH = 0.1;
+long CHANGE_FREQUENCY_EVAL_CYCLES = 10000;
+float STANDARD_DEV_WIDTH = 0.2;
 bool STD_DEV_INCREASE_MOVES_UP_SAMPLING_FREQUENCY = true;
 int SAMPLE_SIZE_TO_FREQUENCY_RATION = 60;
 int sample_hertz_ratio =  SAMPLE_SIZE_TO_FREQUENCY_RATION*8;
@@ -389,13 +389,12 @@ void animationBAudio() {                                               // runnin
 int master_play_list_index = 0;
 int master_play_list_size = 2;
 int master_play_list[] = {0,1};
-unsigned long finishes_in_one_second = 15;
+unsigned long finishes_in_one_second = 200;
 unsigned long minutes_for_rotation = 1;
 unsigned long count_of_ticks_in_animation = 0;
 void loop() {
   count_of_ticks_in_animation++;
-  if(count_of_ticks_in_animation==finishes_in_one_second*minutes_for_rotation*5){
-    count_of_ticks_in_animation=0;
+  if((1+count_of_ticks_in_animation)%(finishes_in_one_second*minutes_for_rotation*5)==0){
     master_play_list_index = (master_play_list_index + 1)%master_play_list_size;
   }
 
@@ -410,7 +409,7 @@ void loop() {
 
   // uint8_t ratio = beatsin8(2);                                // Alternate between 0 and 255 every minute
   for (int i = 0; i < NUM_LEDS; i++) {                        // mix the 2 arrays together
-    leds[i] = blend( ledsA[i], ledsB[i], 15 );
+    leds[i] = blend( ledsA[i], ledsB[i], 1 );
   }
   FastLED.show();
 }
