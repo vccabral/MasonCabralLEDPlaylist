@@ -112,6 +112,13 @@ void animationAColorSwipeGreen() {                                              
     ledsA[i] = CRGB(0, green, 0);
   }
 }
+void animationAColorSwipeBlue() {                                               // running green stripe in opposite direction.
+  for (int i = 0; i < NUM_LEDS; i++) {
+    uint8_t blue = (millis() / 5) - (i * 12);                    // speed, length
+    if (blue > 128) blue = 0;
+    ledsA[i] = CRGB(0, 0, blue);
+  }
+}
 
 
 
@@ -387,10 +394,14 @@ void animationBAudio() {                                               // runnin
 // go here to change play lists
 
 int master_play_list_index = 0;
-int master_play_list_size = 32;
-int blend_amount[] = {
-  0,2,4,8,16,32,64,128,128,64,32,16,8,4,2,0,
-  0,2,4,8,16,32,64,128,128,64,32,16,8,4,2,0
+int master_play_list_size = 96;
+byte blend_amount[] = {
+  0,2,4,8,8,4,2,1,1,2,4,8,8,4,2,0,
+  0,2,4,8,8,4,2,1,1,2,4,8,8,4,2,0,
+  0,2,4,8,8,4,2,1,1,2,4,8,8,4,2,0,
+  8,12,16,24,36,36,24,36,36,24,36,36,24,16,12,8,
+  8,12,16,24,36,36,24,36,36,24,36,36,24,16,12,8,
+  8,12,16,24,36,36,24,36,36,24,36,36,24,16,12,8
 };
 //unsigned long finishes_in_one_second = 200; this is the final value //5 mins or 1 mins i forget
 unsigned long finishes_in_one_second = 5;
@@ -408,6 +419,22 @@ void loop() {
   }
   if(master_play_list_index >= 16 && master_play_list_index < 32){
     animationAColorSwipeGreen();                                               // render the first animation into leds2   
+    animationBAudio();                                               // render the second animation into leds3
+  }
+  if(master_play_list_index >= 32 && master_play_list_index < 48){
+    animationAColorSwipeBlue();                                               // render the first animation into leds2   
+    animationBAudio();                                               // render the second animation into leds3
+  }
+  if(master_play_list_index >= 48 && master_play_list_index < 64){
+    animationAColorSwipeBlue();                                               // render the first animation into leds2   
+    animationBAudio();                                               // render the second animation into leds3
+  }
+  if(master_play_list_index >= 64 && master_play_list_index < 80){
+    animationAColorSwipeBlue();                                               // render the first animation into leds2   
+    animationBAudio();                                               // render the second animation into leds3
+  }
+  if(master_play_list_index >= 80 && master_play_list_index < 96){
+    animationAColorSwipeBlue();                                               // render the first animation into leds2   
     animationBAudio();                                               // render the second animation into leds3
   }
 
