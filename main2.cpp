@@ -387,11 +387,10 @@ void animationBAudio() {                                               // runnin
 // go here to change play lists
 
 int master_play_list_index = 0;
-int master_play_list_size = 6;
-int master_play_list[] = {0,1,2,3,4,5};
-int blend_amount[] = {0,3,6,9,12,15};
+int master_play_list_size = 9;
+int blend_amount[] = {0,2,4,8,16,32,64,128,256};
 //unsigned long finishes_in_one_second = 200; this is the final value //5 mins or 1 mins i forget
-unsigned long finishes_in_one_second = 1;
+unsigned long finishes_in_one_second = 10;
 unsigned long minutes_for_rotation = 1;
 unsigned long count_of_ticks_in_animation = 0;
 void loop() {
@@ -400,28 +399,8 @@ void loop() {
     master_play_list_index = (master_play_list_index + 1)%master_play_list_size;
   }
 
-  if(master_play_list[master_play_list_index]==0){
+  if(master_play_list_index>0 && master_play_list_index < 10){
     animationAColorSwipeRed();                                               // render the first animation into leds2   
-    animationBAudio();                                               // render the second animation into leds3
-  }
-  else if(master_play_list[master_play_list_index]==1){
-    animationAColorSwipeGreen();                                               // render the first animation into leds2   
-    animationBAudio();                                               // render the second animation into leds3
-  }
-  else if(master_play_list[master_play_list_index]==2){
-    animationAColorSwipeRed();                                               // render the first animation into leds2   
-    animationBAudio();                                               // render the second animation into leds3
-  }
-  else if(master_play_list[master_play_list_index]==3){
-    animationAColorSwipeGreen();                                               // render the first animation into leds2   
-    animationBAudio();                                               // render the second animation into leds3
-  }
-  else if(master_play_list[master_play_list_index]==4){
-    animationAColorSwipeRed();                                               // render the first animation into leds2   
-    animationBAudio();                                               // render the second animation into leds3
-  }
-  else if(master_play_list[master_play_list_index]==5){
-    animationAColorSwipeGreen();                                               // render the first animation into leds2   
     animationBAudio();                                               // render the second animation into leds3
   }
 
