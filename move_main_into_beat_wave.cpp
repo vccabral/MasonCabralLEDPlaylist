@@ -1,4 +1,6 @@
 #include "FastLED.h"                                          // FastLED library.
+#include "arduinoFFT.h"
+#include <time.h>
 #if FASTLED_VERSION < 3001000
 #error "Requires FastLED 3.1 or later; check github for latest code."
 #endif
