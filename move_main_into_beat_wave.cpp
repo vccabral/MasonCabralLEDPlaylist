@@ -4,6 +4,7 @@
 #if FASTLED_VERSION < 3001000
 #error "Requires FastLED 3.1 or later; check github for latest code."
 #endif
+#define CHANNEL A0
 #define LED_DT 12                                             // Data pin to connect to the strip.
 #define COLOR_ORDER BGR                                       // It's GRB for WS2812 and BGR for APA102.
 #define LED_TYPE WS2812                                       // Using APA102, WS2812, WS2801. Don't forget to change LEDS.addLeds.
