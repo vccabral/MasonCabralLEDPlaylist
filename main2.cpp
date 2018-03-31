@@ -389,6 +389,8 @@ void animationBAudio() {                                               // runnin
 int master_play_list_index = 0;
 int master_play_list_size = 2;
 int master_play_list[] = {0,1};
+int blend_amount[] = {1,10};
+//unsigned long finishes_in_one_second = 200; this is the final value
 unsigned long finishes_in_one_second = 200;
 unsigned long minutes_for_rotation = 1;
 unsigned long count_of_ticks_in_animation = 0;
@@ -407,9 +409,8 @@ void loop() {
     animationBAudio();                                               // render the second animation into leds3
   }
 
-  // uint8_t ratio = beatsin8(2);                                // Alternate between 0 and 255 every minute
-  for (int i = 0; i < NUM_LEDS; i++) {                        // mix the 2 arrays together
-    leds[i] = blend( ledsA[i], ledsB[i], 1 );
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds[i] = blend( ledsA[i], ledsB[i], blend_amount[master_play_list_index] );
   }
   FastLED.show();
 }
