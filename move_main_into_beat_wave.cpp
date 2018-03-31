@@ -65,12 +65,29 @@ int sum = 0;
 CRGB leds[NUM_LEDS];
 CRGB leds2[NUM_LEDS];
 CRGB leds3[NUM_LEDS];
+int get_sample_size(int _sample_index){
+  if(_sample_size==0){
+    return 8;
+  }else if(_sample_size==1){
+    return 16;
+  }else if(_sample_size==2){
+    return 32;
+  }else if(_sample_size==3){
+    return 64;
+  }else if(_sample_size==4){
+    return 128;
+  }else{
+    return 256;
+  }
+}
 void setup() {
   delay(1000);                                                // Power-up safety delay.
   Serial.begin(57600);                                        // Initialize serial port for debugging.
   LEDS.addLeds<LED_TYPE, LED_DT, COLOR_ORDER>(leds, NUM_LEDS);  // Use this for WS2812
   FastLED.setBrightness(max_bright);
   set_max_power_in_volts_and_milliamps(5, 500);               // FastLED Power management set at 5V, 500mA.
+  samplingFrequency = get_sample_size(_sample_size)*sample_hertz_ratio; //Hz, must be less than 10000 due to ADC
+  sampling_period_us = round(1000000*(1.0/samplingFrequency));
 }
 void animationA() {                                             // running red stripe.
   for (int i = 0; i < NUM_LEDS; i++) {
