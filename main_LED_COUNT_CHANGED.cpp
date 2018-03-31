@@ -80,11 +80,11 @@ int sum = 0;
 PololuLedStrip<12> ledStrip;
 
 // Create a buffer for holding the colors (3 bytes per color).
-#define LED_COUNT 175
+#define NUM_LEDS 175
 
-rgb_color colors[LED_COUNT];
+rgb_color colors[NUM_LEDS];
 
-// rgb_color colors[LED_COUNT];
+// rgb_color colors[NUM_LEDS];
 
 
 int get_sample_size(int _sample_index){
@@ -197,7 +197,7 @@ void loop()
         pass_value = 1.0/(1.0+pow(2.71828, -pass_value*sigmoid_smooth_factor)); 
       }
 
-      while(led_no<(i+1)*LED_COUNT/sample_size){
+      while(led_no<(i+1)*NUM_LEDS/sample_size){
         colors[led_no].red = min((int) (red_base_line + red_factor * pass_value * amplifier), SIGNAL_MAX);
         colors[led_no].green = min((int) (green_base_line + green_factor * pass_value * amplifier), SIGNAL_MAX);
         colors[led_no].blue = min((int) (blue_base_line + blue_factor * pass_value * amplifier), SIGNAL_MAX);
@@ -229,7 +229,7 @@ void loop()
     for(uint16_t i = 0; i < sample_size; i++)
     {
       double pass_value = pass_value_1[i];
-      while(led_no<(i+1)*LED_COUNT/sample_size){
+      while(led_no<(i+1)*NUM_LEDS/sample_size){
         colors[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
         colors[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
         colors[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
@@ -260,7 +260,7 @@ void loop()
     for(uint16_t i = 0; i < sample_size; i++)
     {
       double pass_value = pass_value_2[i];
-      while(led_no<(i+1)*LED_COUNT/sample_size){
+      while(led_no<(i+1)*NUM_LEDS/sample_size){
         colors[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
         colors[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
         colors[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
@@ -291,7 +291,7 @@ void loop()
     for(uint16_t i = 0; i < sample_size; i++)
     {
       double pass_value = pass_value_3[i];
-      while(led_no<(i+1)*LED_COUNT/sample_size){
+      while(led_no<(i+1)*NUM_LEDS/sample_size){
         colors[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
         colors[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
         colors[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
@@ -322,7 +322,7 @@ void loop()
     for(uint16_t i = 0; i < sample_size; i++)
     {
       double pass_value = pass_value_4[i];
-      while(led_no<(i+1)*LED_COUNT/sample_size){
+      while(led_no<(i+1)*NUM_LEDS/sample_size){
         colors[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
         colors[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
         colors[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
@@ -353,7 +353,7 @@ void loop()
     for(uint16_t i = 0; i < sample_size; i++)
     {
       double pass_value = pass_value_5[i];
-      while(led_no<(i+1)*LED_COUNT/sample_size){
+      while(led_no<(i+1)*NUM_LEDS/sample_size){
         colors[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
         colors[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
         colors[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
@@ -364,7 +364,7 @@ void loop()
   }
 
   // FastLED.show();
-  ledStrip.write(colors, LED_COUNT);
+  ledStrip.write(colors, NUM_LEDS);
   
 
   // extra stuff
