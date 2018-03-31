@@ -13,6 +13,7 @@
 #define qsuba(x, b)  ((x>b)?x-b:0)                            // Analog Unsigned subtraction macro. if result <0, then => 0
 uint8_t max_bright = 128;                                     // Overall brightness definition. It can be changed on the fly.
 //new stuff
+srand(time(NULL))
 int _sample_size = 0; 
 int max_bins = 4;
 bool auto_find_frequency_band = true;
@@ -101,21 +102,21 @@ void animationAColorSwipeRed() {                                             // 
   for (int i = 0; i < NUM_LEDS; i++) {
     uint8_t red = (millis() / 10) + (i * 12);                    // speed, length
     if (red > 128) red = 0;
-    ledsA[i] = CRGB(red, 0, 0);
+    ledsA[i] = CRGB(red+(int)(rand()*10), 0, 0);
   }
 }
 void animationAColorSwipeGreen() {                                               // running green stripe in opposite direction.
   for (int i = 0; i < NUM_LEDS; i++) {
     uint8_t green = (millis() / 5) - (i * 12);                    // speed, length
     if (green > 128) green = 0;
-    ledsA[i] = CRGB(0, green, 0);
+    ledsA[i] = CRGB(0, green+(int)(rand()*10), 0);
   }
 }
 void animationAColorSwipeBlue() {                                               // running green stripe in opposite direction.
   for (int i = 0; i < NUM_LEDS; i++) {
     uint8_t blue = (millis() / 5) - (i * 12);                    // speed, length
     if (blue > 128) blue = 0;
-    ledsA[i] = CRGB(0, 0, blue);
+    ledsA[i] = CRGB(0, 0, blue+(int)(rand()*10));
   }
 }
 
@@ -592,7 +593,7 @@ byte blend_amount[] = {
 
 
 //unsigned long finishes_in_one_second = 200; this is the final value //5 mins or 1 mins i forget
-unsigned long finishes_in_one_second = 10;
+unsigned long finishes_in_one_second = 100;
 double minutes_for_rotation = 1;
 unsigned long count_of_ticks_in_animation = 0;
 void loop() {
