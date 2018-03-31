@@ -102,9 +102,19 @@ void animationB() {                                               // running gre
     if (green > 128) green = 0;
     ledsB[i] = CRGB(0, green, 0);
   }
-}void loop() {
-  animationA();                                               // render the first animation into leds2   
-  animationB();                                               // render the second animation into leds3
+}
+
+
+
+
+int master_play_list_index = 0;
+int master_play_list[] = {0};
+void loop() {
+
+  if(master_play_list[master_play_list_index]==0){
+    animationA();                                               // render the first animation into leds2   
+    animationB();                                               // render the second animation into leds3
+  }
 
   uint8_t ratio = beatsin8(2);                                // Alternate between 0 and 255 every minute
   for (int i = 0; i < NUM_LEDS; i++) {                        // mix the 2 arrays together
