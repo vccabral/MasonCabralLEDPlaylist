@@ -6,7 +6,7 @@
 #endif
 #define CHANNEL A0
 #define LED_DT 12                                             // Data pin to connect to the strip.
-#define COLOR_ORDER BGR                                       // It's GRB for WS2812 and BGR for APA102.
+#define COLOR_ORDER GRB                                       // It's GRB for WS2812 and BGR for APA102.
 #define LED_TYPE WS2812                                       // Using APA102, WS2812, WS2801. Don't forget to change LEDS.addLeds.
 #define NUM_LEDS 175                                           // Number of LED's.
 uint8_t max_bright = 128;                                     // Overall brightness definition. It can be changed on the fly.
@@ -387,10 +387,13 @@ void animationBAudio() {                                               // runnin
 // go here to change play lists
 
 int master_play_list_index = 0;
-int master_play_list_size = 9;
-int blend_amount[] = {0,2,4,8,16,32,64,128,256};
+int master_play_list_size = 32;
+int blend_amount[] = {
+  0,2,4,8,16,32,64,128,128,64,32,16,8,4,2,0,
+  0,2,4,8,16,32,64,128,128,64,32,16,8,4,2,0
+};
 //unsigned long finishes_in_one_second = 200; this is the final value //5 mins or 1 mins i forget
-unsigned long finishes_in_one_second = 10;
+unsigned long finishes_in_one_second = 5;
 unsigned long minutes_for_rotation = 1;
 unsigned long count_of_ticks_in_animation = 0;
 void loop() {
@@ -399,8 +402,12 @@ void loop() {
     master_play_list_index = (master_play_list_index + 1)%master_play_list_size;
   }
 
-  if(master_play_list_index>0 && master_play_list_index < 10){
+  if(master_play_list_index < 16){
     animationAColorSwipeRed();                                               // render the first animation into leds2   
+    animationBAudio();                                               // render the second animation into leds3
+  }
+  if(master_play_list_index >= 16 && master_play_list_index < 32){
+    animationAColorSwipeGreen();                                               // render the first animation into leds2   
     animationBAudio();                                               // render the second animation into leds3
   }
 
