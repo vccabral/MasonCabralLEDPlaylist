@@ -89,9 +89,6 @@ void setup() {
 }
 
 
-
-
-
 // define new animations here that affect A
 
 // color swipe A
@@ -124,14 +121,6 @@ void animationAColorSwipeBlue() {                                               
 
 // original audio analysis
 void animationBAudio() {                                               // running green stripe in opposite direction.
-  bluetooth_strength = 0;
-  int bluetooth_samples = 10;
-  for(byte i = 0;i<bluetooth_samples;i++){
-    bluetooth_strength += analogRead(bluetooth_signal_pin);
-  }
-  float red_factor = sin(bluetooth_strength*color_cycle_factor);
-  float green_factor = sin(bluetooth_strength*color_cycle_factor+3.14/2.0);
-  float blue_factor = sin(bluetooth_strength*color_cycle_factor+3.14);
 
   int sample_size = get_sample_size(_sample_size);
   for(int i=0; i<sample_size; i++)
@@ -187,9 +176,9 @@ void animationBAudio() {                                               // runnin
       double pass_value = pass_value_0[i];
 
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        ledsB[led_no].red = min((int) (1 + red_factor * pass_value * amplifier), SIGNAL_MAX);
-        ledsB[led_no].green = min((int) (1 + green_factor * pass_value * amplifier), SIGNAL_MAX);
-        ledsB[led_no].blue = min((int) (1 + blue_factor * pass_value * amplifier), SIGNAL_MAX);
+        ledsB[led_no].red = min((int) (1 + pass_value * amplifier), SIGNAL_MAX);
+        ledsB[led_no].green = min((int) (1 + pass_value * amplifier), SIGNAL_MAX);
+        ledsB[led_no].blue = min((int) (1 + pass_value * amplifier), SIGNAL_MAX);
         led_no++;
       }
     }  
@@ -219,9 +208,9 @@ void animationBAudio() {                                               // runnin
     {
       double pass_value = pass_value_1[i];
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        ledsB[led_no].red = (int) (1 + red_factor * pass_value * amplifier);
-        ledsB[led_no].green = (int) (1 + green_factor * pass_value * amplifier);
-        ledsB[led_no].blue = (int) (1 + blue_factor * pass_value * amplifier);
+        ledsB[led_no].red = (int) (1 + pass_value * amplifier);
+        ledsB[led_no].green = (int) (1 + pass_value * amplifier);
+        ledsB[led_no].blue = (int) (1 + pass_value * amplifier);
         led_no++;
       }
     }  
@@ -250,9 +239,9 @@ void animationBAudio() {                                               // runnin
     {
       double pass_value = pass_value_2[i];
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        ledsB[led_no].red = (int) (1 + red_factor * pass_value * amplifier);
-        ledsB[led_no].green = (int) (1 + green_factor * pass_value * amplifier);
-        ledsB[led_no].blue = (int) (1 + blue_factor * pass_value * amplifier);
+        ledsB[led_no].red = (int) (1 + pass_value * amplifier);
+        ledsB[led_no].green = (int) (1 + pass_value * amplifier);
+        ledsB[led_no].blue = (int) (1 + pass_value * amplifier);
         led_no++;
       }
     }  
@@ -281,9 +270,9 @@ void animationBAudio() {                                               // runnin
     {
       double pass_value = pass_value_3[i];
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        ledsB[led_no].red = (int) (1 + red_factor * pass_value * amplifier);
-        ledsB[led_no].green = (int) (1 + green_factor * pass_value * amplifier);
-        ledsB[led_no].blue = (int) (1 + blue_factor * pass_value * amplifier);
+        ledsB[led_no].red = (int) (1 + pass_value * amplifier);
+        ledsB[led_no].green = (int) (1 + pass_value * amplifier);
+        ledsB[led_no].blue = (int) (1 + pass_value * amplifier);
         led_no++;
       }
     }  
@@ -312,9 +301,9 @@ void animationBAudio() {                                               // runnin
     {
       double pass_value = pass_value_4[i];
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        ledsB[led_no].red = (int) (1 + red_factor * pass_value * amplifier);
-        ledsB[led_no].green = (int) (1 + green_factor * pass_value * amplifier);
-        ledsB[led_no].blue = (int) (1 + blue_factor * pass_value * amplifier);
+        ledsB[led_no].red = (int) (1 + pass_value * amplifier);
+        ledsB[led_no].green = (int) (1 + pass_value * amplifier);
+        ledsB[led_no].blue = (int) (1 + pass_value * amplifier);
         led_no++;
       }
     }  
@@ -343,9 +332,9 @@ void animationBAudio() {                                               // runnin
     {
       double pass_value = pass_value_5[i];
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        ledsB[led_no].red = (int) (1 + red_factor * pass_value * amplifier);
-        ledsB[led_no].green = (int) (1 + green_factor * pass_value * amplifier);
-        ledsB[led_no].blue = (int) (1 + blue_factor * pass_value * amplifier);
+        ledsB[led_no].red = (int) (1 + pass_value * amplifier);
+        ledsB[led_no].green = (int) (1 + pass_value * amplifier);
+        ledsB[led_no].blue = (int) (1 + pass_value * amplifier);
         led_no++;
       }
     }  
@@ -372,7 +361,7 @@ void animationBAudio() {                                               // runnin
       }
     }
     last_std_dev = standard_deviation;
-    amplifier = 10 * standard_deviation;
+    amplifier = 20 * standard_deviation;
     //if(serial) Serial.println("= next band ===========");
     sample_hertz_ratio = SAMPLE_SIZE_TO_FREQUENCY_RATION * get_sample_size(_sample_size);
     sampling_period_us = round(1000000*(1.0/samplingFrequency));
