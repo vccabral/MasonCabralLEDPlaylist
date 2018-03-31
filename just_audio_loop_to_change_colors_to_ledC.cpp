@@ -69,9 +69,9 @@ void loop()
       }
 
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        colors[led_no].red = min((int) (red_base_line + red_factor * pass_value * amplifier), SIGNAL_MAX);
-        colors[led_no].green = min((int) (green_base_line + green_factor * pass_value * amplifier), SIGNAL_MAX);
-        colors[led_no].blue = min((int) (blue_base_line + blue_factor * pass_value * amplifier), SIGNAL_MAX);
+        ledsB[led_no].red = min((int) (red_base_line + red_factor * pass_value * amplifier), SIGNAL_MAX);
+        ledsB[led_no].green = min((int) (green_base_line + green_factor * pass_value * amplifier), SIGNAL_MAX);
+        ledsB[led_no].blue = min((int) (blue_base_line + blue_factor * pass_value * amplifier), SIGNAL_MAX);
         led_no++;
       }
     }  
@@ -101,9 +101,9 @@ void loop()
     {
       double pass_value = pass_value_1[i];
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        colors[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
-        colors[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
-        colors[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
+        ledsB[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
+        ledsB[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
+        ledsB[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
         led_no++;
       }
     }  
@@ -132,9 +132,9 @@ void loop()
     {
       double pass_value = pass_value_2[i];
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        colors[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
-        colors[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
-        colors[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
+        ledsB[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
+        ledsB[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
+        ledsB[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
         led_no++;
       }
     }  
@@ -163,9 +163,9 @@ void loop()
     {
       double pass_value = pass_value_3[i];
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        colors[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
-        colors[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
-        colors[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
+        ledsB[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
+        ledsB[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
+        ledsB[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
         led_no++;
       }
     }  
@@ -194,9 +194,9 @@ void loop()
     {
       double pass_value = pass_value_4[i];
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        colors[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
-        colors[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
-        colors[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
+        ledsB[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
+        ledsB[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
+        ledsB[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
         led_no++;
       }
     }  
@@ -225,9 +225,9 @@ void loop()
     {
       double pass_value = pass_value_5[i];
       while(led_no<(i+1)*NUM_LEDS/sample_size){
-        colors[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
-        colors[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
-        colors[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
+        ledsB[led_no].red = (int) (red_base_line + red_factor * pass_value * amplifier);
+        ledsB[led_no].green = (int) (green_base_line + green_factor * pass_value * amplifier);
+        ledsB[led_no].blue = (int) (blue_base_line + blue_factor * pass_value * amplifier);
         led_no++;
       }
     }  
@@ -235,7 +235,7 @@ void loop()
   }
 
   // FastLED.show();
-  ledStrip.write(colors, NUM_LEDS);
+  ledStrip.write(ledsB, NUM_LEDS);
   
 
   // extra stuff
