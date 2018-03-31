@@ -63,8 +63,8 @@ arduinoFFT FFT = arduinoFFT();
 int sum = 0;
 //new
 CRGB leds[NUM_LEDS];
-CRGB leds2[NUM_LEDS];
-CRGB leds3[NUM_LEDS];
+CRGB ledsA[NUM_LEDS];
+CRGB ledsB[NUM_LEDS];
 int get_sample_size(int _sample_index){
   if(_sample_size==0){
     return 8;
@@ -93,14 +93,14 @@ void animationA() {                                             // running red s
   for (int i = 0; i < NUM_LEDS; i++) {
     uint8_t red = (millis() / 10) + (i * 12);                    // speed, length
     if (red > 128) red = 0;
-    leds2[i] = CRGB(red, 0, 0);
+    ledsA[i] = CRGB(red, 0, 0);
   }
 }
 void animationB() {                                               // running green stripe in opposite direction.
   for (int i = 0; i < NUM_LEDS; i++) {
     uint8_t green = (millis() / 5) - (i * 12);                    // speed, length
     if (green > 128) green = 0;
-    leds3[i] = CRGB(0, green, 0);
+    ledsB[i] = CRGB(0, green, 0);
   }
 }void loop() {
   animationA();                                               // render the first animation into leds2   
@@ -108,7 +108,7 @@ void animationB() {                                               // running gre
 
   uint8_t ratio = beatsin8(2);                                // Alternate between 0 and 255 every minute
   for (int i = 0; i < NUM_LEDS; i++) {                        // mix the 2 arrays together
-    leds[i] = blend( leds2[i], leds3[i], ratio );
+    leds[i] = blend( ledsA[i], ledsB[i], ratio );
   }
   FastLED.show();
 }
