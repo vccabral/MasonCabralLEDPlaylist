@@ -13,9 +13,9 @@ uint8_t max_bright = 128;                                     // Overall brightn
 //new stuff
 int _sample_size = 0; 
 bool auto_find_frequency_band = true;
-long CHANGE_FREQUENCY_EVAL_CYCLES = 10000;
-float STANDARD_DEV_WIDTH = 0.2;
-bool STD_DEV_INCREASE_MOVES_UP_SAMPLING_FREQUENCY = true;
+long CHANGE_FREQUENCY_EVAL_CYCLES = 10;
+float STANDARD_DEV_WIDTH = 0;
+bool STD_DEV_INCREASE_MOVES_UP_SAMPLING_FREQUENCY = false;
 int SAMPLE_SIZE_TO_FREQUENCY_RATION = 60;
 int sample_hertz_ratio =  SAMPLE_SIZE_TO_FREQUENCY_RATION*8;
 double color_cycle_factor = pow(2.0, -10);
@@ -387,11 +387,11 @@ void animationBAudio() {                                               // runnin
 // go here to change play lists
 
 int master_play_list_index = 0;
-int master_play_list_size = 2;
-int master_play_list[] = {0,1};
-int blend_amount[] = {1,10};
-//unsigned long finishes_in_one_second = 200; this is the final value
-unsigned long finishes_in_one_second = 200;
+int master_play_list_size = 6;
+int master_play_list[] = {0,1,2,3,4,5};
+int blend_amount[] = {0,3,6,9,12,15};
+//unsigned long finishes_in_one_second = 200; this is the final value //5 mins or 1 mins i forget
+unsigned long finishes_in_one_second = 1;
 unsigned long minutes_for_rotation = 1;
 unsigned long count_of_ticks_in_animation = 0;
 void loop() {
@@ -405,6 +405,22 @@ void loop() {
     animationBAudio();                                               // render the second animation into leds3
   }
   else if(master_play_list[master_play_list_index]==1){
+    animationAColorSwipeGreen();                                               // render the first animation into leds2   
+    animationBAudio();                                               // render the second animation into leds3
+  }
+  else if(master_play_list[master_play_list_index]==2){
+    animationAColorSwipeRed();                                               // render the first animation into leds2   
+    animationBAudio();                                               // render the second animation into leds3
+  }
+  else if(master_play_list[master_play_list_index]==3){
+    animationAColorSwipeGreen();                                               // render the first animation into leds2   
+    animationBAudio();                                               // render the second animation into leds3
+  }
+  else if(master_play_list[master_play_list_index]==4){
+    animationAColorSwipeRed();                                               // render the first animation into leds2   
+    animationBAudio();                                               // render the second animation into leds3
+  }
+  else if(master_play_list[master_play_list_index]==5){
     animationAColorSwipeGreen();                                               // render the first animation into leds2   
     animationBAudio();                                               // render the second animation into leds3
   }
