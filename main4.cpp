@@ -187,6 +187,43 @@ void animationAconfetti(){
 }
 
 
+uint8_t fadeval = 224;                                        // Trail behind the LED's. Lower => faster fade.
+uint8_t bpm = 30;
+
+void animationAdotbeat(){
+  uint8_t inner = beatsin8(bpm, NUM_LEDS/4, NUM_LEDS/4*3);    // Move 1/4 to 3/4
+  uint8_t outer = beatsin8(bpm, 0, NUM_LEDS-1);               // Move entire length
+  uint8_t middle = beatsin8(bpm, NUM_LEDS/3, NUM_LEDS/3*2);   // Move 1/3 to 2/3
+
+  leds[middle] = CRGB::Purple;
+  leds[inner] = CRGB::Blue;
+  leds[outer] = CRGB::Aqua;
+
+  nscale8(ledsA,NUM_LEDS,fadeval);     
+}
+
+
+
+void ease() {
+
+  static uint8_t easeOutVal = 0;
+  static uint8_t easeInVal  = 0;
+  static uint8_t lerpVal    = 0;
+
+  easeOutVal = ease8InOutQuad(easeInVal);                     // Start with easeInVal at 0 and then go to 255 for the full easing.
+  easeInVal++;
+
+  lerpVal = lerp8by8(0, NUM_LEDS, easeOutVal);                // Map it to the number of LED's you have.
+
+  ledsA[lerpVal] = CRGB::Red;
+  fadeToBlackBy(ledsA, NUM_LEDS, 16);                          // 8 bit, 1 = slow fade, 255 = fast fade
+  
+} // ease()
+void animationAeasing(){
+  EVERY_N_MILLISECONDS(20) {                           // FastLED based non-blocking delay to update/display the sequence.
+    ease();
+  }
+}
 
 // original audio analysis
 void animationBAudio() {                                               // running green stripe in opposite direction.
@@ -408,8 +445,8 @@ void animationBAudio() {                                               // runnin
 
 // go here to change play lists
 
-int master_play_list_index = 128;
-int master_play_list_size = 144;
+int master_play_list_index = 160;
+int master_play_list_size = 176;
 byte blend_amount[] = {
   0,2,4,8,8,4,2,1,1,2,4,8,8,4,2,0,
   0,2,4,8,8,4,2,1,1,2,4,8,8,4,2,0,
@@ -419,6 +456,8 @@ byte blend_amount[] = {
   8,12,16,24,36,36,24,36,36,24,36,36,24,16,12,8,
   8,12,16,24,36,36,24,36,36,24,36,36,24,16,12,8,
   8,12,16,24,36,36,24,36,36,24,36,36,24,16,12,8,
+  8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
+  8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
   8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8
 };
 //unsigned long finishes_in_one_second = 200; this is the final value //5 mins or 1 mins i forget
@@ -465,6 +504,13 @@ void loop() {
   }
   else if(master_play_list_index < 144){
     animationAconfetti();                                               // render the first animation into leds2   
+    animationBAudio();                                               // render the second animation into leds3
+  }
+  else if(master_play_list_index < 160){
+    animationAdotbeat();                                               // render the first animation into leds2   
+    animationBAudio();                                               // render the second animation into leds3
+  }else if(master_play_list_index < 176){
+    animationAeasing();
     animationBAudio();                                               // render the second animation into leds3
   }
 
